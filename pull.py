@@ -1,11 +1,26 @@
-"""Get Puzzles.
+# /// script
+# requires-python = ">=3.12"
+# dependencies = [
+#     "selenium",
+#     "webdriver-manager",
+# ]
+# ///
+"""Get Subsolver Puzzles.
 
-Get all puzzle text from Subsolver and write to 'puzzles.txt'.
+Will download all the puzzles from Subsolver and save them to puzzles.txt (one
+per line). (Requires a number of dependencies, you're likely better off just
+copying puzzles manually from the website.)
 
-It's not a simple HTTP GET because the puzzle text is rendered with
-Javascript and requires a keypress to reveal the text. We got around this
-with Selenium. This code uses Firefox, though you can probably modify it to
-whatever browser you have.
+Usage:
+
+uv run pull.py
+
+Description:
+
+It's not a simple HTTP GET because the puzzle text is rendered with Javascript
+and requires a keypress to reveal the text. We got around this with Selenium.
+This code uses Firefox, though you can probably modify it to whatever browser
+you have.
 
 If you're working remotely (via SSH), you will need to use the Selenium server.
 To install:
@@ -35,8 +50,7 @@ def get_puzzle_text(puzzle_num: int, driver: webdriver.Firefox) -> str:
     s = "".join(e.text if e.text != "" else " " for e in driver.find_elements(By.CLASS_NAME, "puzzle-letter"))
     return s
 
-
-if __name__ == "__main__":
+def get_puzzles():
     # Install the Gecko driver, if needed
     GeckoDriverManager().install()
 
@@ -53,3 +67,7 @@ if __name__ == "__main__":
         for i in range(112):
             f.write(get_puzzle_text(i, driver) + "\n")
     driver.close()
+
+
+if __name__ == "__main__":
+    get_puzzles()

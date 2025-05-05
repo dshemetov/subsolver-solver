@@ -1,4 +1,21 @@
+# /// script
+# requires-python = ">=3.12"
+# dependencies = [
+#     "numpy",
+#     "requests",
+#     "scikit-learn",
+#     "torch",
+#     "tqdm",
+#     "transformers",
+# ]
+# ///
 """A Subtitution Cypher Solver.
+
+Will solve every puzzle in 'puzzles.txt' (one per line) and print the solutions.
+
+Usage:
+
+uv run solve.py
 
 Playing around with neural network language models. Many ideas taken from
 Quipster (2003):
